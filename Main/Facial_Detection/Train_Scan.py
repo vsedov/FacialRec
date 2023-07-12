@@ -46,24 +46,18 @@ def Scan():
 
 
 	recognizer = svm.SVC(C=77.00099999999999, break_ties=False, cache_size=200,
-    class_weight='balanced', coef0=0.0001, decision_function_shape='ovr',
-    degree=3, gamma='scale', kernel='sigmoid', max_iter=-1, probability=True,
-    random_state=None, shrinking=True, verbose=False)
+	class_weight='balanced', coef0=0.0001, decision_function_shape='ovr',
+	degree=3, gamma='scale', kernel='sigmoid', max_iter=-1, probability=True,
+	random_state=None, shrinking=True, verbose=False)
 
 
 	recognizer.fit(data["embeddings"], labels)
 
 
-	# write the actual face recognition model to disk
-	f = open('/home/viv/GitHub/Facial Recognition/Main/output/recognizer.pickle', "wb")
-	f.write(pickle.dumps(recognizer))
-	f.close()
-	# write the label encoder to disk
-	f = open('/home/viv/GitHub/Facial Recognition/Main/output/main.pickle', "wb")
-	f.write(pickle.dumps(main))
-	f.close()
-
-
+	with open('/home/viv/GitHub/Facial Recognition/Main/output/recognizer.pickle', "wb") as f:
+		f.write(pickle.dumps(recognizer))
+	with open('/home/viv/GitHub/Facial Recognition/Main/output/main.pickle', "wb") as f:
+		f.write(pickle.dumps(main))
 	print("Loading Detector main - from path starting facial rec.")
 	# load our serialized face detector from disk
 	print("loading face detector...")
@@ -150,12 +144,12 @@ def Scan():
 				# ding box of the face along with the
 				# associated probability
 				text = "{}: {:.2f}%".format(name, proba * 100)
-				y = startY - 10 if startY - 10 > 10 else startY + 10
+				y = startY - 10 if startY > 20 else startY + 10
 				cv2.rectangle(frame, (startX, startY), (endX, endY),
 					(0, 0, 255), 2)
 				cv2.putText(frame, text, (startX, y),
 					cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
-			
+
 
 		# update the FPS counter
 		fps.update()

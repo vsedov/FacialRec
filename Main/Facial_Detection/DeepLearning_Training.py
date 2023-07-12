@@ -108,14 +108,10 @@ def main():
 
     recognizer.fit(data["embeddings"], labels)
 
-    # write the actual face recognition model to disk
-    f = open("/home/viv/GitHub/Facial Recognition/Main/output/recognizer.pickle", "wb")
-    f.write(pickle.dumps(recognizer))
-    f.close()
-    # write the label encoder to disk
-    f = open("/home/viv/GitHub/Facial Recognition/Main/output/main.pickle", "wb")
-    f.write(pickle.dumps(main))
-    f.close()
+    with open("/home/viv/GitHub/Facial Recognition/Main/output/recognizer.pickle", "wb") as f:
+        f.write(pickle.dumps(recognizer))
+    with open("/home/viv/GitHub/Facial Recognition/Main/output/main.pickle", "wb") as f:
+        f.write(pickle.dumps(main))
 
 
 if __name__ == "__main__":

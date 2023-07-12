@@ -32,8 +32,7 @@ total = 0
 # loop over the image paths
 for (i, imagePath) in enumerate(imagePaths):
 	# extract the person name from the image path
-	print("[INFO] processing image {}/{}".format(i + 1,
-		len(imagePaths)))
+	print(f"[INFO] processing image {i + 1}/{len(imagePaths)}")
 	name = imagePath.split(os.path.sep)[-2]
 
 	# load the image, resize it to have a width of 600 pixels (while
@@ -92,8 +91,7 @@ for (i, imagePath) in enumerate(imagePaths):
 			total += 1
 
 # dump the facial embeddings + names to disk
-print("[INFO] serializing {} encodings...".format(total))
+print(f"[INFO] serializing {total} encodings...")
 data = {"embeddings": knownEmbeddings, "names": knownNames}
-f = open('/home/viv/GitHub/Facial Recognition/Alpha/face_detection_model/output/embeddings.pickle', "wb")
-f.write(pickle.dumps(data))
-f.close()
+with open('/home/viv/GitHub/Facial Recognition/Alpha/face_detection_model/output/embeddings.pickle', "wb") as f:
+	f.write(pickle.dumps(data))

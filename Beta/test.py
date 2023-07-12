@@ -21,7 +21,7 @@ imayes =str(input("Do you want to add a face or upgrade facial data : Yes or No 
 
 
 
-if imayes.lower() == "yes" : #Accepts both types of input that has Upercase and lower case values 
+if imayes.lower() == "yes": #Accepts both types of input that has Upercase and lower case values 
 
     pathds = '/home/viv/GitHub/Facial Recognition/Main/Dataset/' # For functino useroption and listfile
 
@@ -41,12 +41,14 @@ if imayes.lower() == "yes" : #Accepts both types of input that has Upercase and 
         if cv2.waitKey(25)& 0xFF == ord('s'): #action taken 
 
 
-            pathlib.Path('/home/viv/GitHub/Facial Recognition/Main/Dataset/'+f"{n}").mkdir(parents=True, exist_ok=True)  # makes directory if user is not within it already  
+            pathlib.Path(
+                f"/home/viv/GitHub/Facial Recognition/Main/Dataset/{n}"
+            ).mkdir(parents=True, exist_ok=True)
 
-            path = '/home/viv/GitHub/Facial Recognition/Main/Dataset/'+f"{n}/" # Path to new direcotry taken.
+            path = f"/home/viv/GitHub/Facial Recognition/Main/Dataset/{n}/"
 
             dir = os.listdir(path) # this just gets the list of directories that you have
-            filename2 = f"{n}.jpg"  
+            filename2 = f"{n}.jpg"
             filename2= os.path.join(path , filename2)
             if os.path.isfile(filename2): #if  x0.jpg in file direcotry, meaning that the file exists
                 print ("File exist") # working
@@ -57,17 +59,14 @@ if imayes.lower() == "yes" : #Accepts both types of input that has Upercase and 
                     if os.path.isfile(new_file_name):
                         print("thiss is a new file",new_file_name)
                         continue
-                        cv2.imwrite(os.path.join(path , filename2),image) 
-                        break
-                        
                     else:
                         filename2 = new_file_name
 
-                        print("this is not a new file name" + filename2)
-                        
-                        cv2.imwrite(os.path.join(path , filename2),image) 
+                        print(f"this is not a new file name{filename2}")
+
+                        cv2.imwrite(os.path.join(path , filename2),image)
                         break
-             
+
             if len(dir) == 0: # this would check if there is a face or not  -- WORKING 
                 print("You have No Facial Data")      
                 filename2 = f"{n}.jpg"
@@ -87,7 +86,7 @@ if imayes.lower() == "yes" : #Accepts both types of input that has Upercase and 
     video_capture.release()
     cv2.destroyAllWindows()
     print (time.time()-t) # time taken
-    
+
 elif imayes.lower =="no":
     print("Thank you for your time, this program will now quit")
     exit()

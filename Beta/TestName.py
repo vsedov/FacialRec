@@ -1,9 +1,9 @@
 import os
 
-n = str("vivian")
+n = "vivian"
 counter = 0 
 
-path = '/home/viv/GitHub/Facial Recognition/Main/Dataset/'+f"{n}/"
+path = f"/home/viv/GitHub/Facial Recognition/Main/Dataset/{n}/"
 
 filename2 = f"{n}.jpg"  #Name and 0 as original number
 

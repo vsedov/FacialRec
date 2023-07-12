@@ -39,25 +39,22 @@ def UpgradeFace(filename2, path, image):
     """
 
     # if  x0.jpg in file direcotry, meaning that the file exists
-    if os.path.isfile(filename2):
-        print("File exist")  # working
-        counter = 1
-        while True:
-            counter += 1
-            new_file_name = filename2.split(".jpg")[0] + str(counter) + ".jpg"
-            if os.path.isfile(new_file_name):
-                print("thiss is a new file", new_file_name)
-                continue
-                cv2.imwrite(os.path.join(path, filename2), image)
-                break
+    if not os.path.isfile(filename2):
+        return
+    print("File exist")  # working
+    counter = 1
+    while True:
+        counter += 1
+        new_file_name = filename2.split(".jpg")[0] + str(counter) + ".jpg"
+        if os.path.isfile(new_file_name):
+            print("thiss is a new file", new_file_name)
+        else:
+            filename2 = new_file_name
 
-            else:
-                filename2 = new_file_name
+            print(f"this is not a new file name{filename2}")
 
-                print("this is not a new file name" + filename2)
-
-                cv2.imwrite(os.path.join(path, filename2), image)
-                break
+            cv2.imwrite(os.path.join(path, filename2), image)
+            break
 
         # print(filename2)
 
@@ -87,7 +84,7 @@ def list_files(startpath):
     for root, dirs, files in os.walk(startpath):
         level = root.replace(startpath, '').count(os.sep)
         indent = ' ' * 4 * (level)
-        print('{}{}/'.format(indent, os.path.basename(root)))
+        print(f'{indent}{os.path.basename(root)}/')
         # subindent = ' ' * 4 * (level + 1)
         # for f in files:
         #   print('{}{}'.format(subindent, f))
@@ -117,12 +114,10 @@ def UPAD():
 
     if imayes.lower() == "yes":  # Accepts both types of input that has Upercase and lower case values
 
-        # For functino useroption and listfile
-        pathds = '/home/viv/GitHub/Facial Recognition/Main/Dataset/'
-
         usds = str(input(
             "do you want to have a listing of the path so you dont have any repeat of users\n"))
 
+        pathds = '/home/viv/GitHub/Facial Recognition/Main/Dataset/'
         if usds.lower() == "yes":
             useroptionpath(pathds)
 
@@ -155,12 +150,12 @@ def UPAD():
             if cv2.waitKey(25) & 0xFF == ord('s'):  # action taken
 
                 # makes directory if user is not within it already
-                pathlib.Path('/home/viv/GitHub/Facial Recognition/Main/Dataset/' +
-                             f"{n}").mkdir(parents=True, exist_ok=True)
+                pathlib.Path(
+                    f"/home/viv/GitHub/Facial Recognition/Main/Dataset/{n}"
+                ).mkdir(parents=True, exist_ok=True)
 
                 # Path to new direcotry taken.
-                path = '/home/viv/GitHub/Facial Recognition/Main/Dataset/' + \
-                    f"{n}/"
+                path = f"/home/viv/GitHub/Facial Recognition/Main/Dataset/{n}/"
 
                 # this just gets the list of directories that you have
                 dir = os.listdir(path)

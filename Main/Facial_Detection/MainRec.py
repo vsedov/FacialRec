@@ -134,7 +134,7 @@ def main():
                 # ding box of the face along with the
                 # associated probability
                 text = "{}: {:.2f}%".format(name, proba * 100)
-                y = startY - 10 if startY - 10 > 10 else startY + 10
+                y = startY - 10 if startY > 20 else startY + 10
                 cv2.rectangle(frame, (startX, startY), (endX, endY), (0, 0, 255), 2)
                 cv2.putText(
                     frame,

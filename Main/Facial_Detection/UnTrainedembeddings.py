@@ -25,7 +25,7 @@ def embed():
 
 	knownEmbeddings = []
 	knownNames = []
-	
+
 	max = 0
 	for (i, path) in enumerate(path):
 
@@ -78,7 +78,7 @@ def embed():
 				embedder.setInput(fb)
 				vec = embedder.forward()
 
-	
+
 				knownNames.append(name)
 				knownEmbeddings.append(vec.flatten())
 				max += 1
@@ -86,9 +86,8 @@ def embed():
 	# dump the facial embeddings + names to disk
 	print(f" serializing {max} encodings...")
 	data = {"embeddings": knownEmbeddings, "names": knownNames}
-	f = open('/home/viv/GitHub/Facial Recognition/Main/output/embeddings.pickle', "wb")
-	f.write(pickle.dumps(data))
-	f.close()	
+	with open('/home/viv/GitHub/Facial Recognition/Main/output/embeddings.pickle', "wb") as f:
+		f.write(pickle.dumps(data))	
 
 if __name__ == '__main__':
 	embed()
